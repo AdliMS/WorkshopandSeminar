@@ -19,7 +19,6 @@ class Seminar extends Model
     'slug', 
     'description', 
     'max_participants',
-    'current_participants',
     'open_until',
     'start_time',
     'end_time',
@@ -27,6 +26,8 @@ class Seminar extends Model
     'online_platform',
     'online_link',
     'ticket_price',
+    'category_id',
+    'status_id',
     ];
 
     public function category(): BelongsTo
@@ -37,11 +38,6 @@ class Seminar extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(EventStatus::class);
-    }
-
-    public function speaker(): BelongsTo
-    {
-        return $this->belongsTo(Speaker::class);
     }
 
     public function registrations(): HasMany

@@ -17,7 +17,6 @@ class Workshop extends Model
     'slug', 
     'description', 
     'max_participants',
-    'current_participants',
     'open_until',
     'start_time',
     'end_time',
@@ -33,11 +32,6 @@ class Workshop extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(EventStatus::class);
-    }
-
-    public function speaker(): BelongsTo
-    {
-        return $this->belongsTo(Speaker::class);
     }
 
     public function registrations(): HasMany

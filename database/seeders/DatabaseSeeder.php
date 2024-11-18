@@ -6,7 +6,6 @@ use App\Models\User;
 
 use App\Models\Seminar;
 use App\Models\Workshop;
-use App\Models\Speaker;
 use App\Models\EventCategory;
 use App\Models\EventStatus;
 use App\Models\ParticipantRequirement;
@@ -58,27 +57,15 @@ class DatabaseSeeder extends Seeder
         //     // ParticipantRequirement::factory(10)->create()
         // ])->create();
 
-
-
-        ParticipantRequirement::factory(100)->recycle([
-            Speaker::factory(4)->create(),
-
-            Seminar::factory(2)->create(),
-            Workshop::factory(1)->create(),
-            
-
-            Seminar::factory(3)->recycle([
-                EventStatus::factory(2)->create(),
-                EventCategory::factory(2)->create(),
-       
-            ])->create(),
+           
+            Workshop::factory(1)->create();
 
             Workshop::factory(2)->recycle([
                 EventStatus::factory(2)->create(),
-                EventCategory::factory(2)->create(),
-            ])->create(),
+                EventCategory::factory(3)->create(),
+            ])->create();
 
-        ])->create();
+   
 
     }   
 }

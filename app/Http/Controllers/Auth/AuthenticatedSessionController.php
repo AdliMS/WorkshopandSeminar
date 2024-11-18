@@ -8,12 +8,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 use App\Models\Seminar;
 use App\Models\Workshop;
 use App\Models\ParticipantRequirement;
 use App\Models\Participant;
 use App\Models\Registration;
+use App\Models\EventStatus;
+use App\Models\EventCategory;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -107,11 +110,86 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        
-
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->intended(route('admin', absolute: false));
+    }
+
+    public function showSeminarForm() 
+    {
+        $statuses = EventStatus::all();
+        $categories = EventCategory::all();
+        return view('admin.add_seminar', compact('statuses', 'categories'));
+    }
+
+    public function showWorkshopForm() 
+    {
+        $statuses = EventStatus::all();
+        $categories = EventCategory::all();
+        return view('admin.add_workshop', compact('statuses', 'categories'));
+    }
+
+    public function addSeminar(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'venue' => 'required',
+            'max_participants' => 'required',
+            'open_until' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'category' => 'required',
+            'status' => 'required',
+            'description' => 'required',
+        ]);
+
+        $data = [
+            'name' => $request -> input('title'),
+            'slug' => $request -> input(Str::slug('title')),
+            'description' => $request -> input('status'),
+            'max_participants' => $request -> input('max_participants'),
+            'venue' => $request -> input('venue'),
+            'open_until' => $request -> input('open_until'),
+            'start_time' => $request -> input('start_time'),
+            'end_time' => $request -> input('end_time'),
+            'category_id' => $request -> input('category'),
+            'status_id' => $request -> input('status'),
+        ];
+        Seminar::create($data);
+
+        return to_route('admin-all-seminar');
+    }
+
+    public function addWorkshop(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'venue' => 'required',
+            'max_participants' => 'required',
+            'open_until' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'category' => 'required',
+            'status' => 'required',
+            'description' => 'required',
+            
+        ]);
+
+        $data = [
+            'name' => $request -> input('title'),
+            'slug' => $request -> input(Str::slug('title')),
+            'description' => $request -> input('status'),
+            'max_participants' => $request -> input('max_participants'),
+            'venue' => $request -> input('venue'),
+            'open_until' => $request -> input('open_until'),
+            'start_time' => $request -> input('start_time'),
+            'end_time' => $request -> input('end_time'),
+            'category_id' => $request -> input('category'),
+            'status_id' => $request -> input('status'),
+        ];
+        Workshop::create($data);
+
+        return to_route('admin-all-workshop');
     }
 
     public function delSeminarParticipant(Seminar $seminar, Participant $participant) 

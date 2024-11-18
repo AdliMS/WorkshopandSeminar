@@ -27,7 +27,7 @@ class SeminarFactory extends Factory
             'slug' => Str::slug(fake()->sentence(3)),
             'description' => fake()->text(200),
             'max_participants' => fake()->randomNumber(3, true),
-            'current_participants' => fake()->randomNumber(2, true),
+     
             'open_until' => fake()->dateTime(),
             'start_time' => fake()->dateTime(),
             'end_time' => fake()->dateTime(),
