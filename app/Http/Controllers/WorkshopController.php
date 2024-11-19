@@ -18,14 +18,7 @@ class WorkshopController extends Controller
     public function index()
     {
         //
-        $workshops = Workshop::latest()->get();
-
-        // if (request('search')) {
-        //     $data->where('event_name', request('search'));
-        // }
-
-        
-
+        $workshops = Workshop::latest()->get();        
         return view('guest.workshops', ['workshops' => $workshops]);
     }
 
@@ -93,8 +86,6 @@ class WorkshopController extends Controller
     {
         //
         $requirements = ParticipantRequirement::where('workshop_id', $workshop->id)->get();
-        // dd($seminar);
-        // dd($requirements);
         return view('guest.detail_workshop', compact('workshop', 'requirements'));
     }
 

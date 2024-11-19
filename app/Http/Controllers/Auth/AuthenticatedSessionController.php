@@ -115,18 +115,32 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(route('admin', absolute: false));
     }
 
-    public function showSeminarForm() 
+    public function showAddSeminar() 
     {
         $statuses = EventStatus::all();
         $categories = EventCategory::all();
         return view('admin.add_seminar', compact('statuses', 'categories'));
     }
 
-    public function showWorkshopForm() 
+    public function showAddWorkshop() 
     {
         $statuses = EventStatus::all();
         $categories = EventCategory::all();
         return view('admin.add_workshop', compact('statuses', 'categories'));
+    }
+
+    public function showUpdateSeminar(Seminar $seminar)
+    {
+        $statuses = EventStatus::all();
+        $categories = EventCategory::all();
+        return view('admin.update_seminar', compact('statuses', 'categories', 'seminar'));
+    }
+    
+    public function showUpdateWorkshop(Workshop $workshop)
+    {
+        $statuses = EventStatus::all();
+        $categories = EventCategory::all();
+        return view('admin.update_workshop', compact('statuses', 'categories', 'workshop'));
     }
 
     public function addSeminar(Request $request)
@@ -194,17 +208,6 @@ class AuthenticatedSessionController extends Controller
 
     public function updateSeminar (Request $request, Seminar $seminar) 
     {
-        $request->validate([
-            'title' => 'required',
-            'venue' => 'required',
-            'max_participants' => 'required',
-            'open_until' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'category' => 'required',
-            'status' => 'required',
-            'description' => 'required',
-        ]);
 
         $data = [
             'name' => $request -> input('title'),
@@ -218,9 +221,31 @@ class AuthenticatedSessionController extends Controller
             'category_id' => $request -> input('category'),
             'status_id' => $request -> input('status'),
         ];
-        Seminar::find($seminar)->update($data);
 
-        return to_route('admin-seminar');
+        Seminar::find($seminar->id)->update($data);
+
+        return to_route('admin-seminar', ['seminar'=>$seminar]);
+    }
+
+    public function updateWorkshop (Request $request, Workshop $workshop) 
+    {
+
+        $data = [
+            'name' => $request -> input('title'),
+            'slug' => $request -> input(Str::slug('title')),
+            'description' => $request -> input('description'),
+            'max_participants' => $request -> input('max_participants'),
+            'venue' => $request -> input('venue'),
+            'open_until' => $request -> input('open_until'),
+            'start_time' => $request -> input('start_time'),
+            'end_time' => $request -> input('end_time'),
+            'category_id' => $request -> input('category'),
+            'status_id' => $request -> input('status'),
+        ];
+
+        Workshop::find($workshop->id)->update($data);
+
+        return to_route('admin-workshop', ['workshop'=>$workshop]);
     }
 
     public function delSeminarParticipant(Seminar $seminar, Participant $participant) 

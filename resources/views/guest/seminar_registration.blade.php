@@ -34,9 +34,6 @@
                             <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900">Nomor Handphone</label>
                             <input type="number" name="phone_number" id="phone_number"  class="bg-gray-50 hover:bg-gray-100 border border-gray-300 text-gray-900 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                             
-                            @if (Session::has('error'))
-                                <p class="text-sm text-red-500">{{ Session::get('error') }}</p>    
-                            @endif
                         </div>
                         
         

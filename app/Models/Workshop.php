@@ -22,6 +22,8 @@ class Workshop extends Model
     'end_time',
     'venue',
     'ticket_price',
+    'category_id',
+    'status_id',
     ];
 
     public function category(): BelongsTo

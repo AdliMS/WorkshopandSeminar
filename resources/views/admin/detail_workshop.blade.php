@@ -36,7 +36,7 @@
             <section>
                 <h2 class="text-3xl">Deskripsi</h2>
                 <img class="my-2" src="{{ asset('assets/img/event.jpg') }}" alt="">
-                <p class="font-light">{{ $workshop->description }}<</p>
+                <p class="font-light">{{ $workshop->description }}</p>
             </section>
 
             <section>
@@ -53,6 +53,11 @@
 
         {{-- Aside --}}
         <aside class="w-96 flex flex-col gap-12">
+
+            <a
+                class="min-w-full p-4 bg-[#3A6D8C] text-white text-center font-medium tracking-widest uppercase shadow-lg hover:bg-[#326280] transition-all" 
+                href="{{ route('update-workshop-form', $workshop->id) }}"> edit acara 
+            </a>
 
             {{-- Jadwal Pelaksanaan --}}
             <section class="flex flex-col gap-2">

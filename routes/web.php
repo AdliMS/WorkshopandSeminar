@@ -10,23 +10,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 
-
+// admin views
 Route::get('/admin', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('admin');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 require __DIR__.'/auth.php';
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 // guest views
 Route::get('/', [SeminarController::class, 'index']);
@@ -39,5 +28,3 @@ Route::post('/seminar/{seminar}/registration', [SeminarController::class, 'store
 Route::get('/workshop/{workshop}/registration', [WorkshopController::class, 'create']);
 Route::post('/workshop/{workshop}/registration', [WorkshopController::class, 'store']);
 
-
-// Route::get('/my_page', [MyPlaceController::class,'index']);

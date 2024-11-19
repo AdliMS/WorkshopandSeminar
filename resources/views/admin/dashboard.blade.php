@@ -15,7 +15,7 @@
     <div class=" h-full w-1/2 m-0 bg-white flex justify-center items-center flex-wrap gap-4 ">
 
         <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/seminars') }}">Lihat Seminar</a>
-        <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/seminar/tambah') }}">Tambah Seminar</a>
+        <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('/admin/seminar/tambah') }}">Tambah Seminar</a>
         <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/workshops') }}">Lihat Workshop</a>
         <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/workshop/tambah') }}">Tambah Workshop</a>
 

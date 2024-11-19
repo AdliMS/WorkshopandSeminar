@@ -17,12 +17,7 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        //
         $seminars = Seminar::latest()->get();
-
-        // if (request('search')) {
-        //     $data->where('event_name', request('search'));
-        // }
         return view('guest.seminars', ['title' => 'Admin Dashboard', 'seminars'=>$seminars]);
     }
 
@@ -31,8 +26,6 @@ class SeminarController extends Controller
      */
     public function create(Seminar $seminar)
     {
-        //
-
         return view('guest.seminar_registration', ['seminar'=> $seminar]);
     }
 
