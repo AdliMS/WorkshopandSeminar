@@ -12,27 +12,7 @@
 </head>
 <body class="h-full p-20 bg-white flex justify-center items-center flex-wrap">
 
-    {{-- <div class=" h-full w-1/2 m-0 bg-white flex justify-center items-center flex-wrap gap-4 ">
-
-        <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/workshops') }}">Lihat workshop</a>
-        <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/workshop/tambah') }}">Tambah workshop</a>
-        <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/workshops') }}">Lihat Workshop</a>
-        <a class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" href="{{ url('admin/workshops/tambah') }}">Tambah Workshop</a>
-
-        <form class="w-96 bg-white p-5 font-semibold text-center text-[#7469B6] text-2xl uppercase shadow-md hover:bg-gray-50 transition-all" method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <x-responsive-nav-link  
-            :href="route('logout')"
-                    onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                {{ __('Log Out') }}
-            </x-responsive-nav-link>
-            
-        </form>
-
-        
-    </div> --}}
+    
 
     <section class="bg-[#7469B6] w-3/5 h-full overflow-y-scroll border shadom-md">
         <div class="py-8 px-4 mx-auto max-w-3xl lg:py-16 ">
@@ -57,14 +37,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline pendaftaran</label>
                         <input autocomplete="off" type="date" name="open_until" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                     </div>
-                    <div class="sm:col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Platform online <span class="font-light text-green-300">(isi jika bersifat online)</span></label>
-                        <input autocomplete="off" type="text" name="online_platform" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link online <span class="font-light text-green-300">(isi jika bersifat online)</span></label>
-                        <input autocomplete="off" type="url" name="online_link" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    </div>
+                    
                     <div class="w-full">
                         <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu mulai</label>
                         <input autocomplete="off" type="datetime-local" name="start_time" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
@@ -87,7 +60,7 @@
                     </div>
                     <div>
                         <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                        <select name="status" id="category" class=" bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <select name="status" id="category" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             @foreach ($statuses as $status)
                                 <option value="{{ $status->id }}">{{ $status->name }}</option>
                             

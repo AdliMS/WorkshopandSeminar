@@ -38,5 +38,11 @@
         <x-admin.footer></x-footer>
     </footer>
         
+    
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('updateProductButton').click();
+  });
+</script>
 </html>

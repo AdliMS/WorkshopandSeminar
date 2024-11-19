@@ -65,14 +65,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/seminars', [AuthenticatedSessionController::class, 'getAllSeminars'])->name('admin-all-seminar');
     Route::get('/admin/workshops', [AuthenticatedSessionController::class, 'getAllWorkshops'])->name('admin-all-workshop');
 
+    Route::get('admin/seminar/{seminar}', [AuthenticatedSessionController::class, 'getSeminar'])->name('admin-seminar');
+    Route::get('admin/workshop/{workshop}', [AuthenticatedSessionController::class, 'getWorkshop'])->name('admin-workshop');
+
     Route::get('/admin/seminar/tambah', [AuthenticatedSessionController::class, 'showSeminarForm'])->name('seminar-form');
     Route::get('/admin/workshop/tambah', [AuthenticatedSessionController::class, 'showWorkshopForm'])->name('workshop-form');
 
     Route::post('/admin/seminar/tambah', [AuthenticatedSessionController::class, 'addSeminar'])->name('add-seminar');
     Route::post('/admin/workshop/tambah', [AuthenticatedSessionController::class, 'addWorkshop'])->name('add-workshop');
 
-    Route::get('admin/seminar/{seminar}', [AuthenticatedSessionController::class, 'getSeminar'])->name('admin-seminar');
-    Route::get('admin/workshop/{workshop}', [AuthenticatedSessionController::class, 'getWorkshop'])->name('admin-workshop');
+    Route::put('admin/seminar/{seminar}', [AuthenticatedSessionController::class, 'updateSeminar'])->name('update-seminar');
+    Route::put('admin/workshop/{workshop}', [AuthenticatedSessionController::class, 'updateWorkshop'])->name('update-workshop');
 
     Route::delete('admin/seminar/{seminar}/delete-participant/{participant}', [AuthenticatedSessionController::class, 'delSeminarParticipant'])->name('admin-seminar-delete-participant');
     Route::delete('admin/workshop/{workshop}/delete-participant/{participant}', [AuthenticatedSessionController::class, 'delWorkshopParticipant'])->name('admin-workshop-delete-participant');

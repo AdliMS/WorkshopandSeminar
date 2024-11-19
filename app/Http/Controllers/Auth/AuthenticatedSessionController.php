@@ -49,9 +49,8 @@ class AuthenticatedSessionController extends Controller
         $participant_id = Registration::where('seminar_id', $seminar->id)->get('participant_id');
         // $participants = Participant::latest();
         $participants = Participant::find($participant_id);
-
-        // Quidem
-        // dd($participants);
+        $statuses = EventStatus::all();
+        $categories = EventCategory::all();
     
         if (request('search')) {
             $participants = $participants->filter(function ($participant) {
@@ -63,8 +62,12 @@ class AuthenticatedSessionController extends Controller
             // 'data' => $data,
             'seminar' => $seminar,
             'requirements' => $requirements,
-            'participants' => $participants
+            'participants' => $participants,
+            'statuses' => $statuses,
+            'categories' => $categories,
         ]);
+
+        
       
         // dd($participants);
         // dd($requirements);
@@ -80,9 +83,6 @@ class AuthenticatedSessionController extends Controller
         // $participants = Participant::latest();
         $participants = Participant::find($participant_id);
 
-        // Quidem
-        // dd($participants);
-    
         if (request('search')) {
             $participants = $participants->filter(function ($participant) {
                 return stripos($participant->name, request('search')) !== false;
@@ -146,7 +146,7 @@ class AuthenticatedSessionController extends Controller
         $data = [
             'name' => $request -> input('title'),
             'slug' => $request -> input(Str::slug('title')),
-            'description' => $request -> input('status'),
+            'description' => $request -> input('description'),
             'max_participants' => $request -> input('max_participants'),
             'venue' => $request -> input('venue'),
             'open_until' => $request -> input('open_until'),
@@ -178,7 +178,7 @@ class AuthenticatedSessionController extends Controller
         $data = [
             'name' => $request -> input('title'),
             'slug' => $request -> input(Str::slug('title')),
-            'description' => $request -> input('status'),
+            'description' => $request -> input('description'),
             'max_participants' => $request -> input('max_participants'),
             'venue' => $request -> input('venue'),
             'open_until' => $request -> input('open_until'),
@@ -190,6 +190,37 @@ class AuthenticatedSessionController extends Controller
         Workshop::create($data);
 
         return to_route('admin-all-workshop');
+    }
+
+    public function updateSeminar (Request $request, Seminar $seminar) 
+    {
+        $request->validate([
+            'title' => 'required',
+            'venue' => 'required',
+            'max_participants' => 'required',
+            'open_until' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'category' => 'required',
+            'status' => 'required',
+            'description' => 'required',
+        ]);
+
+        $data = [
+            'name' => $request -> input('title'),
+            'slug' => $request -> input(Str::slug('title')),
+            'description' => $request -> input('description'),
+            'max_participants' => $request -> input('max_participants'),
+            'venue' => $request -> input('venue'),
+            'open_until' => $request -> input('open_until'),
+            'start_time' => $request -> input('start_time'),
+            'end_time' => $request -> input('end_time'),
+            'category_id' => $request -> input('category'),
+            'status_id' => $request -> input('status'),
+        ];
+        Seminar::find($seminar)->update($data);
+
+        return to_route('admin-seminar');
     }
 
     public function delSeminarParticipant(Seminar $seminar, Participant $participant) 
