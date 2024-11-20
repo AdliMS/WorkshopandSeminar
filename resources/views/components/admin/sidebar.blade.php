@@ -1,15 +1,14 @@
 <div class=" w-[24rem] border-r-[1px] bg-white border-black flex flex-col justify-between text-start h-full" >
     <section class="px-12">
 
-                <section class="my-14">
+                {{-- <section class="my-14">
                     <h1 class="text-4xl font-normal">By : </h1>
-                </section>
+                </section> --}}
 
                 <section class="flex flex-col gap-4">
                     
-
                 
-                    <a href="{{ url('admin/') }}"><h3 class="border-y-[1px] border-[#E1AFD1] py-8 w-[12rem] text-lg font-normal my-4 hover:px-2 transition-all">Back</h3></a>
+                    <a href="{{ url('admin/') }}"><h3 class="py-8 w-[16rem] text-4xl font-thin my-4 hover:border-b-[1px] hover:border-[#E1AFD1] hover:px-4 transition-all">Back</h3></a>
                        
                 </section>
 

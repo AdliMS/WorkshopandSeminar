@@ -18,9 +18,7 @@ class EventCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            'name' => 'kategori: '.fake()->sentence(2),
-            'slug' => Str::slug(fake()->sentence(3)),
+            
         ];
     }
 }

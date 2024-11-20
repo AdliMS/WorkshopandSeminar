@@ -2,20 +2,20 @@
 <x-admin.layout>
 
 
-    <section class="flex justify-center p-8 gap-8 flex-wrap bg-white w-full ">
+    <section class="flex justify-center p-8 gap-8 flex-wrap bg-white w-full h-full ">
 
         @foreach ($workshops as $workshop)
                 <div class="max-w-2xl min-h-fit bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-all">
 
                     {{-- Link to individual event --}}
-                    <a href="#">
+                    <a href="{{ route('admin-workshop', ['workshop' => $workshop]) }}">
                         <img class="rounded-t-lg" src="{{ asset('assets/img/event.jpg') }}" alt="" />
                     </a>
 
                     <div class="p-5">
 
                         {{-- Link to individual event --}}
-                        <a href="{{route('admin-workshop', ['workshop' => $workshop]) }}">
+                        <a href="{{ route('admin-workshop', ['workshop' => $workshop]) }}">
                             <h5 class="mb-1 text-3xl font-md tracking-tight text-[#AD88C6] hover:underline">{{ $workshop->name }}</h5>
                         </a>
 
@@ -38,8 +38,6 @@
                 </div>        
             @endforeach
 
-    </section>
-
-    
+    </section> 
 
 </x-admin.layout>

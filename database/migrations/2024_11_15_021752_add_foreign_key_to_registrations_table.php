@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('seminar_id')->nullable();     
             $table->unsignedBigInteger('workshop_id')->nullable();
             $table->unsignedBigInteger('participant_id');
+            
             $table->foreign('seminar_id')->references('id')->on('seminars');
             $table->foreign('workshop_id')->references('id')->on('workshops')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('participant_id')->references('id')->on('participants')->onDelete('cascade')->onUpdate('cascade');

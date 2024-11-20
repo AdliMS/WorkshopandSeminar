@@ -15,20 +15,21 @@ class Seminar extends Model
 
     protected $table = 'seminars';
     protected $fillable = [
-    'name', 
-    'slug', 
-    'description', 
-    'max_participants',
-    'open_until',
-    'start_time',
-    'end_time',
-    'venue',
-    'online_platform',
-    'online_link',
-    'ticket_price',
-    'category_id',
-    'status_id',
-    ];
+                            'name', 
+                            'slug', 
+                            'description', 
+                            'max_participants',
+                            'current_participants',
+                            'open_until',
+                            'start_time',
+                            'end_time',
+                            'venue',
+                            'online_platform',
+                            'online_link',
+                            'ticket_price',
+                            'category_id',
+                            'status_id',
+                        ];
 
     public function category(): BelongsTo
     {

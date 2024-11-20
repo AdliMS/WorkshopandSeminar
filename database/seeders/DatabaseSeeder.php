@@ -6,13 +6,14 @@ use App\Models\User;
 
 use App\Models\Seminar;
 use App\Models\Workshop;
-use App\Models\EventCategory;
 use App\Models\EventStatus;
-use App\Models\ParticipantRequirement;
-use App\Models\Registration;
 use App\Models\Participant;
+use Illuminate\Support\Str;
+use App\Models\Registration;
+use App\Models\EventCategory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\ParticipantRequirement;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +30,13 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin',
         ]);
 
-             
+        $categories = array("Teknologi", "Kesehatan", "Sosial", "Seni Budaya");
+        foreach ($categories as $category) {
+            EventCategory::factory()->create([
+                'name' => $category,
+                'slug' => Str::slug($category),
+            ]);
+          }
 
         // Seminar::factory(8)->recycle([
         //     EventStatus::factory(3)->create(),   
@@ -58,14 +65,15 @@ class DatabaseSeeder extends Seeder
         // ])->create();
 
            
-            Workshop::factory(1)->create();
+            // Workshop::factory(1)->create();
 
-            Workshop::factory(2)->recycle([
-                EventStatus::factory(2)->create(),
-                EventCategory::factory(3)->create(),
-            ])->create();
+            // Workshop::factory(2)->recycle([
+            //     EventStatus::factory(2)->create(),
+            //     EventCategory::factory(3)->create(),
+            // ])->create();
 
-   
+            // EventStatus::factory(2)->create();
+            // EventCategory::factory(3)->create();
 
     }   
 }

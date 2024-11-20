@@ -28,3 +28,4 @@ Route::post('/seminar/{seminar}/registration', [SeminarController::class, 'store
 Route::get('/workshop/{workshop}/registration', [WorkshopController::class, 'create']);
 Route::post('/workshop/{workshop}/registration', [WorkshopController::class, 'store']);
 
+app('debugbar')->disable();

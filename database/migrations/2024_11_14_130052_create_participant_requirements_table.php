@@ -14,16 +14,8 @@ return new class extends Migration
         Schema::create('participant_requirements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-
             $table->timestamps();
         });
-
-        
-        // Schema::table('participant_requirements', function (Blueprint $table) {
-
-        //     $table->foreign('seminar_id')->references('id')->on('seminars')->onDelete('cascade')->onUpdate('cascade');
-        //     $table->foreign('workshop_id')->references('id')->on('workshops')->onDelete('cascade')->onUpdate('cascade');
-        // });
     }
 
     /**

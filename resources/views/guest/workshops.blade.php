@@ -8,7 +8,7 @@
                 <div class="max-w-2xl min-h-fit bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-all">
 
                     {{-- Link to individual event --}}
-                    <a href="#">
+                    <a href="workshop/{{ $workshop->id }}">
                         <img class="rounded-t-lg" src="{{ asset('assets/img/event.jpg') }}" alt="" />
                     </a>
 

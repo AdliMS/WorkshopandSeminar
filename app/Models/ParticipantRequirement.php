@@ -11,9 +11,7 @@ class ParticipantRequirement extends Model
     use HasFactory;
     //
     protected $table = 'participant_requirements';
-    protected $fillable = [
-        'name',
-    ];
+    protected $fillable = ['name'];
 
     public function seminar(): BelongsTo 
     {

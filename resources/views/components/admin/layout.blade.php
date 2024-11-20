@@ -18,14 +18,14 @@
     </header>
 
 
-    <section class="flex justify-between flex-auto bg-white ">
+    <section class="flex justify-between flex-auto ">
 
         <!-- Sidebar -->
         <aside>
             <x-admin.sidebar></x-sidebar>
         </aside>
 
-        <main >    
+        <main class="w-full">    
 
           {{$slot}}
 

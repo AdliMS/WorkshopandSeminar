@@ -13,18 +13,19 @@ class Workshop extends Model
     //
     protected $table = 'workshops';
     protected $fillable = [
-    'name', 
-    'slug', 
-    'description', 
-    'max_participants',
-    'open_until',
-    'start_time',
-    'end_time',
-    'venue',
-    'ticket_price',
-    'category_id',
-    'status_id',
-    ];
+                            'name', 
+                            'slug', 
+                            'description', 
+                            'max_participants',
+                            'current_participants',
+                            'open_until',
+                            'start_time',
+                            'end_time',
+                            'venue',
+                            'ticket_price',
+                            'category_id',
+                            'status_id',
+                        ];
 
     public function category(): BelongsTo
     {

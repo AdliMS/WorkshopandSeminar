@@ -24,10 +24,9 @@ class AuthenticatedSessionController extends Controller
     {
         //
         $seminars = Seminar::latest()->get();
+        // $participant_id = Registration::where('seminar_id', )
+        // $current_participants = 
 
-        // if (request('search')) {
-        //     $data->where('event_name', request('search'));
-        // }
         return view('admin.seminars', ['title' => 'Admin Dashboard', 'seminars'=>$seminars]);
     }
 
@@ -35,10 +34,6 @@ class AuthenticatedSessionController extends Controller
     {
         // 
         $workshops = Workshop::latest()->get();
-
-        // if (request('search')) {
-        //     $data->where('event_name', request('search'));
-        // }
         return view('admin.workshops', ['title' => 'Admin Dashboard', 'workshops'=>$workshops]);
     }
 
@@ -47,10 +42,7 @@ class AuthenticatedSessionController extends Controller
         //
         $requirements = ParticipantRequirement::where('seminar_id', $seminar->id)->get();
         $participant_id = Registration::where('seminar_id', $seminar->id)->get('participant_id');
-        // $participants = Participant::latest();
         $participants = Participant::find($participant_id);
-        $statuses = EventStatus::all();
-        $categories = EventCategory::all();
     
         if (request('search')) {
             $participants = $participants->filter(function ($participant) {
@@ -63,16 +55,8 @@ class AuthenticatedSessionController extends Controller
             'seminar' => $seminar,
             'requirements' => $requirements,
             'participants' => $participants,
-            'statuses' => $statuses,
-            'categories' => $categories,
         ]);
 
-        
-      
-        // dd($participants);
-        // dd($requirements);
-    
-        // return view('admin.detail_seminar', compact('seminar', 'requirements', 'participants'));
     }
 
     public function getWorkshop(Workshop $workshop)
@@ -80,7 +64,6 @@ class AuthenticatedSessionController extends Controller
         //
         $requirements = ParticipantRequirement::where('workshop_id', $workshop->id)->get();
         $participant_id = Registration::where('workshop_id', $workshop->id)->get('participant_id');
-        // $participants = Participant::latest();
         $participants = Participant::find($participant_id);
 
         if (request('search')) {
@@ -91,7 +74,6 @@ class AuthenticatedSessionController extends Controller
         
 
         return view('admin.detail_workshop', [
-            // 'data' => $data,
             'workshop' => $workshop,
             'requirements' => $requirements,
             'participants' => $participants
@@ -117,30 +99,26 @@ class AuthenticatedSessionController extends Controller
 
     public function showAddSeminar() 
     {
-        $statuses = EventStatus::all();
         $categories = EventCategory::all();
-        return view('admin.add_seminar', compact('statuses', 'categories'));
+        return view('admin.add_seminar', compact('categories'));
     }
 
     public function showAddWorkshop() 
     {
-        $statuses = EventStatus::all();
         $categories = EventCategory::all();
-        return view('admin.add_workshop', compact('statuses', 'categories'));
+        return view('admin.add_workshop', compact('categories'));
     }
 
     public function showUpdateSeminar(Seminar $seminar)
     {
-        $statuses = EventStatus::all();
         $categories = EventCategory::all();
-        return view('admin.update_seminar', compact('statuses', 'categories', 'seminar'));
+        return view('admin.update_seminar', compact('categories', 'seminar'));
     }
     
     public function showUpdateWorkshop(Workshop $workshop)
     {
-        $statuses = EventStatus::all();
         $categories = EventCategory::all();
-        return view('admin.update_workshop', compact('statuses', 'categories', 'workshop'));
+        return view('admin.update_workshop', compact('categories', 'workshop'));
     }
 
     public function addSeminar(Request $request)
@@ -153,7 +131,6 @@ class AuthenticatedSessionController extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'category' => 'required',
-            'status' => 'required',
             'description' => 'required',
         ]);
 
@@ -167,7 +144,6 @@ class AuthenticatedSessionController extends Controller
             'start_time' => $request -> input('start_time'),
             'end_time' => $request -> input('end_time'),
             'category_id' => $request -> input('category'),
-            'status_id' => $request -> input('status'),
         ];
         Seminar::create($data);
 
@@ -176,19 +152,7 @@ class AuthenticatedSessionController extends Controller
 
     public function addWorkshop(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'venue' => 'required',
-            'max_participants' => 'required',
-            'open_until' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'category' => 'required',
-            'status' => 'required',
-            'description' => 'required',
-            
-        ]);
-
+        
         $data = [
             'name' => $request -> input('title'),
             'slug' => $request -> input(Str::slug('title')),
@@ -199,7 +163,6 @@ class AuthenticatedSessionController extends Controller
             'start_time' => $request -> input('start_time'),
             'end_time' => $request -> input('end_time'),
             'category_id' => $request -> input('category'),
-            'status_id' => $request -> input('status'),
         ];
         Workshop::create($data);
 
@@ -219,7 +182,6 @@ class AuthenticatedSessionController extends Controller
             'start_time' => $request -> input('start_time'),
             'end_time' => $request -> input('end_time'),
             'category_id' => $request -> input('category'),
-            'status_id' => $request -> input('status'),
         ];
 
         Seminar::find($seminar->id)->update($data);
@@ -240,7 +202,6 @@ class AuthenticatedSessionController extends Controller
             'start_time' => $request -> input('start_time'),
             'end_time' => $request -> input('end_time'),
             'category_id' => $request -> input('category'),
-            'status_id' => $request -> input('status'),
         ];
 
         Workshop::find($workshop->id)->update($data);
@@ -248,8 +209,49 @@ class AuthenticatedSessionController extends Controller
         return to_route('admin-workshop', ['workshop'=>$workshop]);
     }
 
+    public function delSeminar (Seminar $seminar) 
+    {
+
+        // karena tiap acara memiliki registrasi untuk para peserta yang terdaftar,
+        // maka selain acara dan registrasinya, peserta dari acara ini juga perlu di hapus.
+
+        // mencari id peserta yang terhubung ke registrasi untuk acara ini, lalu menghapusnya.
+        foreach ($seminar->registrations as $registration) {
+            // dump($registration->participant_id);
+            Participant::find($registration->participant_id)->delete();
+        }
+        
+        // menghapus registrasi, dan terakhir menghapus acara
+        $seminar->registrations()->delete();
+        $seminar->delete();
+
+        return to_route('admin-all-seminar');
+    }
+
+    public function delWorkshop (Workshop $workshop) 
+    {
+
+        // karena tiap acara memiliki registrasi untuk para peserta yang terdaftar,
+        // maka selain acara dan registrasinya, peserta dari acara ini juga perlu di hapus.
+
+        // mencari id peserta yang terhubung ke registrasi untuk acara ini, lalu menghapusnya.
+        foreach ($workshop->registrations as $registration) {
+            // dump($registration->participant_id);
+            Participant::find($registration->participant_id)->delete();
+        }
+        
+        // menghapus registrasi, dan terakhir menghapus acara
+        $workshop->registrations()->delete();
+        $workshop->delete();
+
+        return to_route('admin-all-workshop');
+    }
+
     public function delSeminarParticipant(Seminar $seminar, Participant $participant) 
     {
+        Seminar::find($seminar->id)->update([
+            'current_participants' => Registration::where('seminar_id', $seminar->id)->get('participant_id')->count() - 1,
+        ]);
         $participant->registrations()->delete();
         $participant->delete();
 
@@ -258,6 +260,9 @@ class AuthenticatedSessionController extends Controller
 
     public function delWorkshopParticipant(Workshop $workshop, Participant $participant) 
     {
+        Workshop::find($workshop->id)->update([
+            'current_participants' => Registration::where('workshop_id', $workshop->id)->get('participant_id')->count() - 1,
+        ]);
         $participant->registrations()->delete();
         $participant->delete();
 

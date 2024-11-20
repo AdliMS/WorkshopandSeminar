@@ -2,13 +2,12 @@
 <x-admin.layout>
 
 
-    <section class="flex justify-center p-8 gap-8 flex-wrap bg-white w-full ">
+    <section class="flex justify-center items-center p-8 gap-8 flex-wrap bg-white w-full h-full">
 
         @foreach ($seminars as $seminar)
                 <div class="max-w-2xl min-h-fit bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-all">
-
                     {{-- Link to individual event --}}
-                    <a href="#">
+                    <a href="{{ route('admin-seminar', ['seminar' => $seminar]) }}">
                         <img class="rounded-t-lg" src="{{ asset('assets/img/event.jpg') }}" alt="" />
                     </a>
 

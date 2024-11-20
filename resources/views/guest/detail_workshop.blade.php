@@ -38,7 +38,7 @@
             <section>
                 <h2 class="text-3xl">Deskripsi</h2>
                 <img class="my-2" src="{{ asset('assets/img/event.jpg') }}" alt="">
-                <p class="font-light">{{ $workshop->description }}<</p>
+                <p class="font-light">{{ $workshop->description }}</p>
             </section>
 
             <section>

@@ -12,14 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('workshops', function (Blueprint $table) {
-            //
-             // foreign keys
-             $table->unsignedBigInteger('category_id')->nullable();
-             $table->unsignedBigInteger('status_id')->nullable();
-             $table->unsignedBigInteger('speaker_id')->nullable();
-             $table->foreign('category_id')->references('id')->on('event_categories')->onDelete('cascade')->onUpdate('cascade');
-             
-             $table->foreign('status_id')->references('id')->on('event_statuses')->onDelete('cascade')->onUpdate('cascade');
+            
+            // foreign keys
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('event_categories')->onDelete('cascade')->onUpdate('cascade');
+            // $table->unsignedBigInteger('speaker_id')->nullable();
              
 
         });

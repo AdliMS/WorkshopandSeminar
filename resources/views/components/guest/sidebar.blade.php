@@ -1,15 +1,10 @@
+@props(['active'])
+
 <div class=" w-[24rem] border-r-[1px] bg-white border-black flex flex-col justify-between text-start h-full" >
     <section class="px-12">
-
-                <section class="my-14">
-                    <h1 class="text-4xl font-normal">By : </h1>
-                </section>
-
                 <section class="flex flex-col gap-4">
 
-                    
-                    
-                    <a href="{{ url('/') }}"><h3 class="border-y-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all">Seminar</h3></a>
+                    <a href="{{ url('/') }}"><h3 class="border-b-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all">Seminar</h3></a>
                     
                     <a href="{{ url('workshops/') }}"><h3 class="border-b-[1px] border-[#6A9AB0] pb-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all">Workshop</h3></a>
 
@@ -32,10 +27,7 @@
                             @endauth
                     
                     @endif
-    
-    
-    
-                       
+
                 </section>
 
             </section>

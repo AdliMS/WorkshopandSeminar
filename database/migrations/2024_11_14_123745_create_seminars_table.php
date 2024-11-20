@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('description');
             $table->integer('max_participants');
+            $table->integer('current_participants')->default('0');
             $table->date('open_until');
             $table->datetime('start_time');
             $table->datetime('end_time');
@@ -27,13 +28,11 @@ return new class extends Migration
             $table->string('venue')->nullable();
             $table->string('online_platform')->nullable();
             $table->string('online_link')->nullable();
-            $table->string('ticket_price')->nullable();
+            $table->string('ticket_price')->default('0');
 
             $table->timestamps();
-
         });
 
-       
     }
 
     /**

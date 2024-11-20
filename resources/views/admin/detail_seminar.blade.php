@@ -56,16 +56,21 @@
         {{-- Aside --}}
         <aside class="w-80 flex flex-col gap-12">
             
-            
-
+            <section class="w-80 flex flex-col gap-2">
                 <a
                     class="min-w-full p-4 bg-[#3A6D8C] text-white text-center font-medium tracking-widest uppercase shadow-lg hover:bg-[#326280] transition-all" 
                     href="{{ route('update-seminar-form', $seminar->id) }}"> edit acara 
                 </a>
 
-            
-        
-            
+                <form 
+                    class=" min-w-full p-4 bg-red-500 text-white text-center  shadow-lg hover:bg-red-600 hover:cursor-pointer transition-all" action="{{ route('admin-seminar-delete', $seminar->id) }}" 
+                    method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="font-medium tracking-widest uppercase " href="{{ route('update-seminar-form', $seminar->id) }}"> hapus acara </button>
+                </form>
+            </section>
+
 
             {{-- Jadwal Pelaksanaan --}}
             <section class="flex flex-col gap-2">
@@ -162,21 +167,21 @@
                     @empty
 
                             
-                            <table class="px-4 py-3 text-gray-700 my-1 w-full">
-                                <tbody>
-                                    <tr>
-                                        <td><div class="border-[1px] border-gray-300 w-full px-20"></div></td>
-                                        <td><p class="px-4 py-3 text-center text-lg font-semibold text-gray-500">Belum ada pendaftar aowkokowkkw</p></td>
-                                        <td><div class="border-[1px] border-gray-300 w-full px-20"></div></td>
-                                    </tr>
-                                </tbody>
-                                
-                                
-                            </table>
-                        
+                        <table class="px-4 py-3 text-gray-700 my-1 w-full">
+                            <tbody>
+                                <tr>
+                                    <td><div class="border-[1px] border-gray-300 w-full px-20"></div></td>
+                                    <td><p class="px-4 py-3 text-center text-lg font-semibold text-gray-500">Belum ada pendaftar aowkokowkkw</p></td>
+                                    <td><div class="border-[1px] border-gray-300 w-full px-20"></div></td>
+                                </tr>
+                            </tbody>
+                            
+                            
+                        </table>
+                    
                         
                           
-                        @endforelse
+                    @endforelse
                 </table>
             </div>
 

@@ -54,10 +54,20 @@
         {{-- Aside --}}
         <aside class="w-96 flex flex-col gap-12">
 
-            <a
-                class="min-w-full p-4 bg-[#3A6D8C] text-white text-center font-medium tracking-widest uppercase shadow-lg hover:bg-[#326280] transition-all" 
-                href="{{ route('update-workshop-form', $workshop->id) }}"> edit acara 
-            </a>
+            <section class="w-80 flex flex-col gap-2">
+                <a
+                    class="min-w-full p-4 bg-[#3A6D8C] text-white text-center font-medium tracking-widest uppercase shadow-lg hover:bg-[#326280] transition-all" 
+                    href="{{ route('update-workshop-form', $workshop->id) }}"> edit acara 
+                </a>
+
+                <form 
+                    class=" min-w-full p-4 bg-red-500 text-white text-center  shadow-lg hover:bg-red-600 hover:cursor-pointer transition-all" action="{{ route('admin-workshop-delete', $workshop->id) }}" 
+                    method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="font-medium tracking-widest uppercase " href="{{ route('update-workshop-form', $workshop->id) }}"> hapus acara </button>
+                </form>
+            </section>
 
             {{-- Jadwal Pelaksanaan --}}
             <section class="flex flex-col gap-2">

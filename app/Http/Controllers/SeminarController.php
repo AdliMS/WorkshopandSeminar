@@ -65,6 +65,11 @@ class SeminarController extends Controller
                 'participant_id' => $participant->id,
             ]);
 
+            // 3. Perbarui jumlah peserta yang mendaftar untuk acara ini
+            Seminar::find($seminar_id)->update([
+                'current_participants' => Registration::where('seminar_id', $seminar_id)->get('participant_id')->count(),
+            ]);
+
             // Commit transaksi
             DB::commit();
 
@@ -74,7 +79,7 @@ class SeminarController extends Controller
                 throw $e;
             }
 
-        return Redirect::to('/seminar/'.$seminar_id)->with('success', 'Registrasi sukses!');
+        return Redirect::to('/seminar/'.$seminar_id);
     }
 
     /**
