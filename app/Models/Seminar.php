@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class Seminar extends Model
 {
     //
-
     use HasFactory;
 
     protected $table = 'seminars';
@@ -28,17 +27,11 @@ class Seminar extends Model
                             'online_link',
                             'ticket_price',
                             'category_id',
-                            'status_id',
                         ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(EventCategory::class);
-    }
-
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(EventStatus::class);
     }
 
     public function registrations(): HasMany
