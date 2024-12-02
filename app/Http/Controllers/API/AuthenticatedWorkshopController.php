@@ -45,7 +45,7 @@ class AuthenticatedWorkshopController extends Controller
                 'status' => false,
                 'message' => 'Error adding data',
                 'errors' => $validate->errors(),
-            ]);
+            ], 400);
         }
 
         $workshop = workshop::create($request->all());
@@ -86,7 +86,7 @@ class AuthenticatedWorkshopController extends Controller
         }
 
         $workshop->update($request->all());
-        return new workshopResource($workshop);
+        return new workshopResource([$workshop]);
     }
 
     /**
@@ -94,18 +94,27 @@ class AuthenticatedWorkshopController extends Controller
      */
     public function destroy(Workshop $workshop)
     {
-        // karena tiap acara memiliki registrasi untuk para peserta yang terdaftar,
-        // maka selain acara dan registrasinya, peserta dari acara ini juga perlu di hapus.
+        try {
+            // karena tiap acara memiliki registrasi untuk para peserta yang terdaftar,
+            // maka selain acara dan registrasinya, peserta dari acara ini juga perlu di hapus.
 
-        // mencari id peserta yang terhubung ke registrasi untuk acara ini, lalu menghapusnya.
-        foreach ($workshop->registrations as $registration) {
-            // dump($registration->participant_id);
-            Participant::find($registration->participant_id)->delete();
+            // mencari id peserta yang terhubung ke registrasi untuk acara ini, lalu menghapusnya.
+            foreach ($workshop->registrations as $registration) {
+                // dump($registration->participant_id);
+                Participant::find($registration->participant_id)->delete();
+            }
+            
+            // menghapus registrasi, dan terakhir menghapus acara
+            $workshop->registrations()->delete();
+            $workshop->delete();
+            return response()->json([
+                    'message' => 'Successfully delete a workshop',
+                ], 200);
+        } catch (\Throwable $err) {
+            return response()->json([
+                'status' => false,
+                'message' => $err->getMessage(),
+            ], 404);
         }
-        
-        // menghapus registrasi, dan terakhir menghapus acara
-        $workshop->registrations()->delete();
-        $workshop->delete();
-        return response()->json(null, 204);
     }
 }

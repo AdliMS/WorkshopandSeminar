@@ -30,13 +30,13 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin',
         ]);
 
-        $categories = array("Teknologi", "Kesehatan", "Sosial", "Seni Budaya");
-        foreach ($categories as $category) {
-            EventCategory::factory()->create([
-                'name' => $category,
-                'slug' => Str::slug($category),
-            ]);
-          }
+        // $categories = array("Teknologi", "Kesehatan", "Sosial", "Seni Budaya");
+        // foreach ($categories as $category) {
+        //     EventCategory::factory()->create([
+        //         'name' => $category,
+        //         'slug' => Str::slug($category),
+        //     ]);
+        //   }
 
         // Seminar::factory(8)->recycle([
         //     EventStatus::factory(3)->create(),   

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Seminar;
+use App\Models\User;
 
+use App\Models\Seminar;
 use App\Models\Participant;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\SeminarResource;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,9 +20,17 @@ class AuthenticatedSeminarController extends Controller
      */
     public function index()
     {
-        $seminars = Seminar::latest()->get();
-        return SeminarResource::collection($seminars);
-        // return view('admin.seminars', ['title' => 'Admin Dashboard', 'seminars'=>$seminars]);
+        try {
+            $seminars = Seminar::latest()->get();
+            if (auth('sanctum')->user()->currentAccessToken()) {
+                return SeminarResource::collection($seminars);
+            };
+        } catch (\Throwable $err) {
+            return response()->json([
+                'status' => false,
+                'message' => $err->getMessage(),
+            ], 400);
+        };
     }
 
     /**
@@ -38,6 +48,7 @@ class AuthenticatedSeminarController extends Controller
             'open_until' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'venue' => 'required',
             // 'category_id' => 'required',
         ]);
 
@@ -46,7 +57,7 @@ class AuthenticatedSeminarController extends Controller
                 'status' => false,
                 'message' => 'Error adding data',
                 'errors' => $validate->errors(),
-            ]);
+            ], 400);
         }
 
         $seminar = Seminar::create($request->all());
@@ -67,15 +78,14 @@ class AuthenticatedSeminarController extends Controller
     public function update(Request $request, Seminar $seminar)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'nullable',
-            'slug' => 'nullable',
-            'description' => 'nullable',
-            'max_participants' => 'nullable',
-            'venue' => 'nullable',
-            'open_until' => 'nullable',
-            'start_time' => 'nullable',
-            'end_time' => 'nullable',
-            // 'category_id' => 'nullable',
+            'name' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'max_participants' => 'required',
+            'venue' => 'required',
+            'open_until' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
         ]);
 
         if ($validate->fails()) {
@@ -83,7 +93,7 @@ class AuthenticatedSeminarController extends Controller
                 'status' => false,
                 'message' => 'Error updating data',
                 'errors' => $validate->errors(),
-            ]);
+            ], 400);
         }
 
         $seminar->update($request->all());
@@ -95,18 +105,27 @@ class AuthenticatedSeminarController extends Controller
      */
     public function destroy(Seminar $seminar)
     {
-        // karena tiap acara memiliki registrasi untuk para peserta yang terdaftar,
-        // maka selain acara dan registrasinya, peserta dari acara ini juga perlu di hapus.
+        try {
+            // karena tiap acara memiliki registrasi untuk para peserta yang terdaftar,
+            // maka selain acara dan registrasinya, peserta dari acara ini juga perlu di hapus.
 
-        // mencari id peserta yang terhubung ke registrasi untuk acara ini, lalu menghapusnya.
-        foreach ($seminar->registrations as $registration) {
-            // dump($registration->participant_id);
-            Participant::find($registration->participant_id)->delete();
+            // mencari id peserta yang terhubung ke registrasi untuk acara ini, lalu menghapusnya.
+            foreach ($seminar->registrations as $registration) {
+                // dump($registration->participant_id);
+                Participant::find($registration->participant_id)->delete();
+            }
+            
+            // menghapus registrasi, dan terakhir menghapus acara
+            $seminar->registrations()->delete();
+            $seminar->delete();
+            return response()->json([
+                    'message' => 'Successfully delete a seminar',
+                ], 200);
+        } catch (\Throwable $err) {
+            return response()->json([
+                'status' => false,
+                'message' => $err->getMessage(),
+            ], 404);
         }
-        
-        // menghapus registrasi, dan terakhir menghapus acara
-        $seminar->registrations()->delete();
-        $seminar->delete();
-        return response()->json(null, 204);
     }
 }

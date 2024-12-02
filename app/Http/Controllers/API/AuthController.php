@@ -23,15 +23,8 @@ class AuthController extends Controller {
             if ($validate->fails()) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'Validation Error',
                     'errors' => $validate->errors(),
-                ], 401);
-            }
-
-            if (!Auth::attempt($request->only(['name', 'password']))) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Email & password does not match with our records.',
                 ], 401);
             }
 
