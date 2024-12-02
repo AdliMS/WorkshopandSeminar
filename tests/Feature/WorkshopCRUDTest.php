@@ -89,7 +89,7 @@ class WorkshopCRUDTest extends TestCase
         $workshop = Workshop::where('id', 9)->get();
         $response = $this->getJson('/api/workshops/9');
         
-        $response->assertJsonFragment($workshop);
+        $response->assertJsonFragment($workshop->toArray());
     }
 
     public function test_api_successfully_add_a_workshop() {
@@ -125,9 +125,8 @@ class WorkshopCRUDTest extends TestCase
             'start_time' => "2024-11-06",
             'end_time' => "2024-11-06",
             'venue' => 'Kabupaten p',
-            'category_id' => 1,
         ];
-        $response = $this->putJson('/api/workshops/6', $workshop);
+        $response = $this->putJson('/api/workshops/9', $workshop);
 
         $response->assertStatus(200);
         $response->assertJson(["data" => $workshop]);

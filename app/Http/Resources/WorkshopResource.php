@@ -25,8 +25,6 @@ class WorkshopResource extends JsonResource
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
             'venue' => $this->venue,
-            'online_platform' => $this->online_platform,
-            'online_link' => $this->online_link,
             'ticket_price' => $this->ticket_price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

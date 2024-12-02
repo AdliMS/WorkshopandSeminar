@@ -19,7 +19,6 @@ class AuthenticatedWorkshopController extends Controller
     {
         $workshops = Workshop::latest()->get();
         return WorkshopResource::collection($workshops);
-        // return view('admin.workshops', ['title' => 'Admin Dashboard', 'workshops'=>$workshops]);
     }
 
     /**
@@ -66,15 +65,14 @@ class AuthenticatedWorkshopController extends Controller
     public function update(Request $request, Workshop $workshop)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'nullable',
-            'slug' => 'nullable',
-            'description' => 'nullable',
-            'max_participants' => 'nullable',
-            'venue' => 'nullable',
-            'open_until' => 'nullable',
-            'start_time' => 'nullable',
-            'end_time' => 'nullable',
-            // 'category_id' => 'nullable',
+            'name' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'max_participants' => 'required',
+            'venue' => 'required',
+            'open_until' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
         ]);
 
         if ($validate->fails()) {
@@ -82,11 +80,11 @@ class AuthenticatedWorkshopController extends Controller
                 'status' => false,
                 'message' => 'Error updating data',
                 'errors' => $validate->errors(),
-            ]);
+            ], 400);
         }
 
         $workshop->update($request->all());
-        return new workshopResource([$workshop]);
+        return new workshopResource($workshop);
     }
 
     /**
