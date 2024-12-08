@@ -4,14 +4,15 @@ namespace Database\Seeders;
 
 use App\Models\User;
 
+use App\Models\Event;
 use App\Models\Seminar;
 use App\Models\Workshop;
 use App\Models\EventStatus;
 use App\Models\Participant;
 use Illuminate\Support\Str;
 use App\Models\Registration;
-use App\Models\EventCategory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\EventCategory;
 use Illuminate\Database\Seeder;
 use App\Models\ParticipantRequirement;
 
@@ -38,11 +39,12 @@ class DatabaseSeeder extends Seeder
             ]);
           }
 
-        // Seminar::factory(8)->recycle([
-        //     EventStatus::factory(3)->create(),   
-        //     EventCategory::factory(4)->create(),
-        //     Speaker::factory(4)->create(),
-        // ])->create();     
+        Event::factory(10)->create([
+            'type' => 'workshop'
+        ]);     
+        Event::factory(9)->create([
+            'type' => 'seminar'
+        ]);     
 
         // Workshop::factory(5)->recycle([
         //     EventStatus::factory(3)->create(),   

@@ -2,16 +2,14 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-
 use App\Models\EventCategory;
-use App\Models\EventStatus;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workshop>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class WorkshopFactory extends Factory
+class EventFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,8 +19,8 @@ class WorkshopFactory extends Factory
     public function definition(): array
     {
         return [
-            //
             'name' => fake()->sentence(4),
+            'type' => 'seminar',
             'slug' => Str::slug(fake()->sentence(3)),
             'description' => fake()->text(200),
             'max_participants' => fake()->randomNumber(3, true),
@@ -31,9 +29,10 @@ class WorkshopFactory extends Factory
             'start_time' => fake()->dateTime(),
             'end_time' => fake()->dateTime(),
             'venue' => 'Kabupaten '.fake()->sentence(1),
-
-            'status_id' => EventStatus::factory(),
-            'category_id' => EventCategory::factory(),
+            
+            // 'speaker_id' => Speaker::factory(),
+            // 'status_id' => EventStatus::factory(),
+            // 'category_id' => EventCategory::factory(),
         ];
     }
 }

@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Seminar extends Model
+class Event extends Model
 {
-    //
-
     use HasFactory;
 
-    protected $table = 'seminars';
+    protected $table = 'events';
     protected $fillable = [
                             'name', 
+                            'type',
                             'slug', 
                             'description', 
                             'max_participants',
@@ -35,12 +34,7 @@ class Seminar extends Model
     {
         return $this->belongsTo(EventCategory::class);
     }
-
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(EventStatus::class);
-    }
-
+    
     public function registrations(): HasMany
     {
         return $this->hasMany(Registration::class);
@@ -50,4 +44,9 @@ class Seminar extends Model
     {
         return $this->hasMany(ParticipantRequirement::class);
     }
+
+    // public function status(): BelongsTo
+    // {
+    //     return $this->belongsTo(EventStatus::class);
+    // }
 }

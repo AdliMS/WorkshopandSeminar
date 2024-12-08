@@ -4,9 +4,8 @@
     <section class="px-12">
                 <section class="flex flex-col gap-4">
 
-                    <a href="{{ url('/') }}"><h3 class="border-b-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all">Seminar</h3></a>
-                    
-                    <a href="{{ url('workshops/') }}"><h3 class="border-b-[1px] border-[#6A9AB0] pb-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all">Workshop</h3></a>
+                    <button class="border-b-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all text-start">Seminar</button>
+                    <button class="border-b-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all text-start">Workshop</button>
 
                     @if (Route::has('login'))
                             
@@ -46,7 +45,13 @@
                 <div class="bg-[#6A9AB0] w-[16rem] h-[1px] mb-2 self-center"></div>
                 
                
-                <a href=""><h3 class="text-lg font-normal pb-8 text-center">Web Framework, Sistem Informasi</h3></a>
+                <a href=""><h3 class="text-lg font-normal text-center">Web Framework, Sistem Informasi</h3></a>
+
+                <div class="flex justify-center w-full py-4 gap-4">
+
+                    <img class="w-16" src="{{ asset('assets/img/inforsa.svg') }}" alt="">
+                    <img class="w-16" src="{{ asset('assets/img/unmul.svg') }}" alt="">
+                </div>
 
             </section>
 </div>

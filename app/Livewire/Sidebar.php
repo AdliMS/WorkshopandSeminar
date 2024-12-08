@@ -4,11 +4,11 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class GuestDashboard extends Component
+class Sidebar extends Component
 {
+
     public function render()
     {
-        
-        return view('livewire.guest-dashboard');
+        return view('livewire.sidebar');
     }
 }

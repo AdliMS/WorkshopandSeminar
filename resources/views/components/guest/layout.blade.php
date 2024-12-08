@@ -8,20 +8,16 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
 
 </head>
-<body class="flex flex-col h-full m-0 ">
+<body class="flex flex-col h-full m-0">
  
-    <header >
+    <header>
             <x-guest.header></x-header>    
     </header>
 
     <section class="flex justify-between flex-auto bg-white ">
-        <!-- Sidebar -->
-        <aside>
-            <x-guest.sidebar></x-sidebar>
-        </aside>
 
-        <main class="w-full" >    
-            @livewire('guest-dashboard')
+        <main class="w-full flex flex-col p-8 bg-[#fafafa]" >    
+            @livewire('event-list')
         </main>
     </section>
 
