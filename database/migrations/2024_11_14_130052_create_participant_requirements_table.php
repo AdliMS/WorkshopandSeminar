@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+
+            // foreign keys
+            $table->unsignedBigInteger('event_id')->nullable();  
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

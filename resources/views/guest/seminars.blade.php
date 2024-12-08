@@ -1,7 +1,4 @@
-
 <x-guest.layout>
-
-
     <section class="flex justify-center p-8 gap-8 flex-wrap bg-white w-full ">
 
         @foreach ($seminars as $seminar)
@@ -33,7 +30,4 @@
             @endforeach
 
     </section>
-
-    
-
 </x-guest.layout>

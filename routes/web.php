@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuestDashboardController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\WorkshopController;
@@ -18,7 +19,7 @@ Route::get('/admin', function () {
 require __DIR__.'/auth.php';
 
 // guest views
-Route::get('/', [SeminarController::class, 'index']);
+Route::get('/', [GuestDashboardController::class, 'index']);
 Route::get('/workshops', [WorkshopController::class, 'index']);
 Route::get('/seminar/{seminar}', [SeminarController::class, 'show']);
 Route::get('/workshop/{workshop}', [WorkshopController::class, 'show']);
