@@ -2,7 +2,16 @@
      
         <ul class="flex items-end gap-8">
             <li><a class="text-3xl font-semibold" href="">Seminar dan Workshop</a></li>
-            <li><a class="text-xl" href="">Admin</a></li>
+
+            @if (Route::has('login'))
+                            
+                    @auth
+                        <a href="{{ route('admin') }}" class="text-xl">Admin</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-xl">Admin</a>
+                    @endauth
+            
+            @endif
         </ul>
 
     <section class="flex justify-center items-center w-1/4">
@@ -14,7 +23,7 @@
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
                 </div>
-                <input type="search" id="search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-white dark:focus:outline-none dark:focus:ring-0 dark:placeholder-gray-400 dark:text-black dark:focus:border-primary-500 hover:bg-slate-50 focus:outline-none transition-all" placeholder="Cari nama peserta" autocomplete="off">
+                <input wire:model.live="search" type="search" id="search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-white dark:focus:outline-none dark:focus:ring-0 dark:placeholder-gray-400 dark:text-black dark:focus:border-primary-500 hover:bg-slate-50 focus:outline-none transition-all" placeholder="Cari nama peserta" autocomplete="off">
             </div>
         </form>
     </section>

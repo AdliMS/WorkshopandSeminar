@@ -6,15 +6,15 @@ use App\Models\Event;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class EventList extends Component
+class Workshop extends Component
 {
     use WithPagination;
 
     public $search;
     public function render()
     {
-        $events = Event::latest()->where('name', 'like', '%'.$this->search.'%')->paginate(2);
-        return view('livewire.event-list', [
+        $events = Event::latest() ->where('type', 'workshop')->where('name', 'like', '%'.$this->search.'%')->paginate(2);
+        return view('livewire.seminar', [
             'events' => $events
         ]);
     }

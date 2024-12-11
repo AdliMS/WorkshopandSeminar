@@ -11,9 +11,20 @@ class GuestDashboardController extends Controller
      */
     public function index()
     {
-        // $seminars
 
         return view('guest.dashboard');
+    }
+
+    public function getSeminars()
+    {
+
+        return view('guest.seminars');
+    }
+
+    public function getWorkshops()
+    {
+
+        return view('guest.workshops');
     }
 
     /**

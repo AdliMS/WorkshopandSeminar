@@ -19,7 +19,7 @@
                         <h5 class="mb-1 text-2xl font-md tracking-tight text-[#3A6D8C] hover:underline">{{ $event->name }}</h5>
                     </a>
 
-                    <p class="text-sm font-normal text-gray-700">Diselenggarakan oleh: Komunitas Pangkalan Besi</p>
+                    <p class="mb-3 text-sm font-normal text-gray-700">Diselenggarakan oleh: Komunitas Pangkalan Besi</p>
                     <p class="my-6 font-normal text-gray-700">{{ $event->description }}</p>
 
                     <ul class="text-sm mb-3 ml-8 font-normal text-gray-700">

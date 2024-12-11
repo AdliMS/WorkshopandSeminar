@@ -20,7 +20,8 @@ require __DIR__.'/auth.php';
 
 // guest views
 Route::get('/', [GuestDashboardController::class, 'index']);
-Route::get('/workshops', [WorkshopController::class, 'index']);
+Route::get('/seminar', [GuestDashboardController::class, 'getSeminars']);
+Route::get('/workshop', [GuestDashboardController::class, 'getWorkshops']);
 Route::get('/seminar/{seminar}', [SeminarController::class, 'show']);
 Route::get('/workshop/{workshop}', [WorkshopController::class, 'show']);
 

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-
 use App\Models\Event;
 use App\Models\Seminar;
 use App\Models\Workshop;

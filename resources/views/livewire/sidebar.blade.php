@@ -7,25 +7,7 @@
                     <button class="border-b-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all text-start">Seminar</button>
                     <button class="border-b-[1px] border-[#6A9AB0] py-4 w-[12rem] text-2xl font-normal hover:px-2 transition-all text-start">Workshop</button>
 
-                    @if (Route::has('login'))
-                            
-                            @auth
-                                <a
-                                    href="{{ route('admin') }}"
-                                    class="border-b-[1px] border-[#6A9AB0] pb-8 w-[12rem] text-lg font-normal my-4 hover:px-2 transition-all">
-                                    Admin
-                                </a>
-                            @else
-                                <a
-                                    href="{{ route('login') }}"
-                                    class="border-b-[1px] border-[#6A9AB0] pb-8 w-[12rem] text-lg font-normal my-4 hover:px-2 transition-all">
-                                    Log in
-                                </a>
-
-                        
-                            @endauth
                     
-                    @endif
 
                 </section>
 
